@@ -2,7 +2,10 @@
 const form = document.querySelector("form")
 const amount = document.getElementById("amount")
 const expense = document.getElementById("expense")
-const category = document.elementFromPoint("category")
+const category = document.getElementById("category")
+
+// Seleciona os elementos da lista.
+const expenseList = document.querySelector("ul")
 
 // Capturando o evento de input para formatar o valor.
 amount.oninput = () => {
@@ -26,5 +29,25 @@ function formatCurrencyBRL(value) {
   // Retorna o valor formatado.
   return value
 }
+
+// Captura o evento de submit do formulário para obter os valores.
+form.onsubmit = (event) => {
+  // Previne o comportamento padrão de recarregar a página.
+  event.preventDefault()
+
+  // Cria um objeto com detalhes da nova despesa.
+  const newExpense = {
+    id: new Date().getTime(),
+    expense: expense.value,
+    category_id: category.value,
+    category_name: category.options[category.selectedIndex].text,
+    amount: amount.value,
+    created_at: new Date(),
+  }
+}
+
+
+
+
 
 
